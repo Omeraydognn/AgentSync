@@ -202,6 +202,14 @@ Yeni komutlar eklenmesi gerekiyor:
       {
         "command": "agentsync.showStatus",
         "title": "AgentSync: Show Status"
+      },
+      {
+        "command": "agentsync.forceUnlock",
+        "title": "AgentSync: Tüm Kilitleri Aç"
+      },
+      {
+        "command": "agentsync.setWalletKey",
+        "title": "AgentSync: Cüzdan Anahtarı Ayarla"
       }
     ],
     "statusBar": []

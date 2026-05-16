@@ -68,7 +68,11 @@ export async function activate(context: vscode.ExtensionContext) {
 	ydoc = new Y.Doc();
 	const fileLocks = ydoc.getMap<number>('file-locks');
 
-	provider = new WebsocketProvider('ws://localhost:1234', 'agentsync-global', ydoc, { connect: true });
+	const cfg = vscode.workspace.getConfiguration('agentsync');
+	const yjsUrl  = cfg.get<string>('yjsServerUrl')  || 'ws://localhost:1234';
+	const ctrlUrl = cfg.get<string>('ctrlServerUrl') || 'ws://localhost:1235';
+
+	provider = new WebsocketProvider(yjsUrl, 'agentsync-global', ydoc, { connect: true });
 
 	provider.awareness.setLocalStateField('user', { name: githubUsername });
 	controlUsername = githubUsername;
@@ -81,7 +85,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			const challenge = `agentsync-${Date.now()}`;
 			const sig       = await wallet.signMessage(challenge);
 
-			controlWs = new WebSocket('ws://localhost:1235');
+			controlWs = new WebSocket(ctrlUrl);
 
 			controlWs.on('open', () => {
 				sendControl({ type: 'auth', wallet: wallet.address, sig, challenge, username: githubUsername, room: 'agentsync-global' });

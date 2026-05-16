@@ -34,6 +34,21 @@
         "label": "GitHub"
       }
     ],
+    "configuration": {
+      "title": "AgentSync",
+      "properties": {
+        "agentsync.yjsServerUrl": {
+          "type": "string",
+          "default": "ws://localhost:1234",
+          "description": "Yjs senkronizasyon sunucusu (port 1234)"
+        },
+        "agentsync.ctrlServerUrl": {
+          "type": "string",
+          "default": "ws://localhost:1235",
+          "description": "Akıllı Trafik Ajanı kontrol kanalı (port 1235)"
+        }
+      }
+    },
     "commands": [
       {
         "command": "agentsync.forceUnlock",
