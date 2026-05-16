@@ -1,0 +1,18 @@
+{
+  "basePath": "/Users/omeraydogan/AgentSync/.vault",
+  "cssTheme": "Obsidian",
+  "pluginEnabledStatus": {},
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "root",
+  "newFilePath": "",
+  "attachmentFolderPath": "",
+  "promptDelete": true,
+  "autoRunCommand": false,
+  "spellcheck": true,
+  "grammar": false,
+  "vimMode": false,
+  "useMarkdownLinks": true,
+  "strictLineBreaks": false,
+  "showFrontmatter": false,
+  "showIndentGuide": true
+}

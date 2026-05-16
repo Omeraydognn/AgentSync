@@ -1,0 +1,44 @@
+{
+  "name": "agentsync",
+  "displayName": "AgentSync",
+  "description": "Multiplayer AI agent code synchronization & conflict resolution tool.",
+  "publisher": "omeraydogan",
+  "version": "0.0.1",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "categories": ["Other", "Machine Learning"],
+  "keywords": ["ai", "collaboration", "agent", "sync", "multiplayer"],
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentsync.forceUnlock",
+        "title": "AgentSync: Force Unlock All Files"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "ws": "^8.20.1",
+    "y-websocket": "^3.0.0",
+    "yjs": "^13.6.30"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.0.0"
+  }
+}
