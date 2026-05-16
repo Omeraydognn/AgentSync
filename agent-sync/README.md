@@ -295,6 +295,6 @@ MIT
 
 ## Geliştirici
 
-**Ömer Aydoğan** — [@Omeraydognn](https://github.com/Omeraydognn)
+**ArfDAO**
 
 > AgentSync, Vibe Coding çağında AI ajanlarının barış içinde bir arada çalışması için tasarlandı.
