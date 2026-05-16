@@ -14,14 +14,14 @@ VS Code editöründeki metin değişikliklerini Yjs'e gönderip, uzak sunucudan 
 
 ## ✅ Başarı Kriterleri
 
-- [ ] `vscode.workspace.onDidChangeTextDocument` dinleniyor
-- [ ] Metin değişiklikleri `Y.Text.insert()` kullanılarak Yjs'e yazılıyor
-- [ ] Yjs güncellemeleri `Y.Text.observe()` ile dinleniyor
-- [ ] `vscode.WorkspaceEdit` kullanılarak editöre uygulanıyor
-- [ ] Local/Remote bayrak sistemi çalışıyor (sonsuz döngü yok)
-- [ ] İki editor arasında metin senkronizasyonu <100ms
-- [ ] Tüm karakterler doğru şekilde sinkronize oluyor
-- [ ] Cursor pozisyonu korunuyor (opsiyonel ama iyi)
+- [x] `vscode.workspace.onDidChangeTextDocument` dinleniyor
+- [x] Metin değişiklikleri `Y.Text.insert()` kullanılarak Yjs'e yazılıyor
+- [x] Yjs güncellemeleri `Y.Text.observe()` ile dinleniyor
+- [x] `vscode.WorkspaceEdit` kullanılarak editöre uygulanıyor
+- [x] Local/Remote bayrak sistemi çalışıyor (sonsuz döngü yok)
+- [x] İki editor arasında metin senkronizasyonu <100ms
+- [x] Tüm karakterler doğru şekilde sinkronize oluyor
+- [x] Cursor pozisyonu korunuyor (opsiyonel ama iyi)
 
 ---
 
@@ -405,8 +405,8 @@ Faz 4'de, yazma çakışmalarını engellemeye başlayacağız:
 
 ---
 
-**Status**: ⏳ Beklemede  
+**Status**: ✅ Tamamlandı  
 **Başlangıç**: -  
-**Bitiş**: -  
+**Bitiş**: 2026-05-16  
 **Not**: Faz 2 tamamlandığında Faz 3'ye başlanacak
 

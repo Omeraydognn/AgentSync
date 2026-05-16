@@ -180,6 +180,16 @@ ctrlWss.on('connection', (ws) => {
         broadcast(clients, { type: 'unlock_ack', fileUri: m.fileUri, username: me.username }, clientWallet);
         console.log(`🔓 [Kontrol] ${me.username} kilidi acti: ${m.fileUri}`);
       }
+
+      if (m.type === 'log') {
+        // Paylaşılan output: bir istemcinin log'unu diğer tüm istemcilere yansıt
+        broadcast(clients, {
+          type: 'log_broadcast',
+          message: m.message,
+          fileName: m.fileName,
+          username: me.username,
+        }, clientWallet);
+      }
     });
 
     ws.on('close', () => {

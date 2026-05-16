@@ -27,3 +27,9 @@ Bu dizin, AgentSync VS Code eklentisi projesinin tüm dokümantasyonunu ve faz t
 ## 🔄 Güncelleme Protokolü
 
 Her faz tamamlandığında ilgili dosya güncellenir ve progress kaydedilir.
+
+---
+
+ömer
+
+monad

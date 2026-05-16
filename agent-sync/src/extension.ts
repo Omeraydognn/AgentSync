@@ -29,16 +29,22 @@ function sendControl(obj: object) {
 	}
 }
 
-function logToOutput(message: string, fileUriString?: string) {
+function logToOutput(message: string, fileUriString?: string, broadcast = false) {
 	const time = new Date().toLocaleTimeString('tr-TR', { hour12: false });
+	let baseFile = '';
 	let fileName = '';
 	if (fileUriString) {
 		try {
 			const parsedUri = vscode.Uri.parse(fileUriString);
-			fileName = ' (' + path.basename(parsedUri.fsPath) + ')';
+			baseFile = path.basename(parsedUri.fsPath);
+			fileName = ' (' + baseFile + ')';
 		} catch (e) {}
 	}
 	outputChannel.appendLine(`[${time}] ${message}${fileName}`);
+
+	if (broadcast) {
+		sendControl({ type: 'log', message, fileName: baseFile });
+	}
 }
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -108,6 +114,12 @@ export async function activate(context: vscode.ExtensionContext) {
 					if (msg.type === 'auth_ok') {
 						logToOutput('✓ Kontrol kanalı kimlik doğrulaması başarılı');
 					}
+					if (msg.type === 'log_broadcast') {
+						// Başka geliştiricinin output'u — bizde de göster (📡 prefix)
+						const t = new Date().toLocaleTimeString('tr-TR', { hour12: false });
+						const fn = msg.fileName ? ` (${msg.fileName})` : '';
+						outputChannel.appendLine(`[${t}] 📡 [${msg.username}] ${msg.message}${fn}`);
+					}
 				} catch { /* binary veya hatalı mesaj */ }
 			});
 
@@ -142,7 +154,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			ytext = new Y.Text();
 			fileTexts.set(uri, ytext);
 			setupRemoteListener(ytext, uri);
-			logToOutput('[+] Takibe alındı', uri);
+			logToOutput('[+] Takibe alındı', uri, true);
 		}
 
 		const localYText = ytext;
@@ -199,7 +211,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				const lockOwnerName = userState?.user?.name || 'Teammate';
 				statusBar.text = `🔴 LOCKED: ${name} (${lockOwnerName})`;
 				statusBar.backgroundColor = new vscode.ThemeColor('statusBarItem.errorBackground');
-				logToOutput(`🔒 KİLİTLENDİ: ${lockOwnerName} şu an yazıyor`, uri);
+				logToOutput(`🔒 KİLİTLENDİ: ${lockOwnerName} şu an yazıyor`, uri, true);
 			} catch (err) {
 				logToOutput(`✗ chmod hatası: ${err}`);
 			}
@@ -216,7 +228,7 @@ export async function activate(context: vscode.ExtensionContext) {
 				lockedFiles.delete(fsPath);
 				statusBar.text = '🟢 AgentSync: Idle';
 				statusBar.backgroundColor = undefined;
-				logToOutput('🔓 Kilit açıldı ve serbest bırakıldı', uri);
+				logToOutput('🔓 Kilit açıldı ve serbest bırakıldı', uri, true);
 			} catch (err) {
 				logToOutput(`✗ chmod hatası: ${err}`);
 			}

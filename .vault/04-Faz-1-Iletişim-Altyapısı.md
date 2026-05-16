@@ -10,14 +10,14 @@ Sadece `yjs` ve `y-websocket` kurularak, paket içindeki hazır WebSocket sunucu
 
 ## ✅ Başarı Kriterleri
 
-- [ ] Node.js projesi oluşturuldu
-- [ ] `yjs` paketi kuruldu
-- [ ] `y-websocket` paketi kuruldu
-- [ ] WebSocket sunucusu başlıyor
-- [ ] Port 1234'te dinliyor (varsayılan)
-- [ ] İki test istemcisi bağlanabiliyor
-- [ ] Yjs güncellemeleri broadcast yapılıyor
-- [ ] Konsola "Server running on ws://localhost:1234" mesajı çıkıyor
+- [x] Node.js projesi oluşturuldu
+- [x] `yjs` paketi kuruldu
+- [x] `y-websocket` paketi kuruldu
+- [x] WebSocket sunucusu başlıyor
+- [x] Port 1234'te dinliyor (varsayılan)
+- [x] İki test istemcisi bağlanabiliyor
+- [x] Yjs güncellemeleri broadcast yapılıyor
+- [x] Konsola "Server running on ws://localhost:1234" mesajı çıkıyor
 
 ---
 
@@ -206,8 +206,8 @@ Faz 1 tamamlandığında ve test geçtiğinde, Faz 2'de (VS Code Eklentisi) bu s
 
 ---
 
-**Status**: ⏳ Beklemede  
+**Status**: ✅ Tamamlandı  
 **Başlangıç**: 2026-05-16  
-**Bitiş**: -  
+**Bitiş**: 2026-05-16  
 **Not**: Faz 1 tamamlanması için komut bekleniyor.
 
