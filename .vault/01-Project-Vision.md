@@ -34,7 +34,7 @@ Sonuç:       🔥 Massive Merge Conflict! 🔥
 - Her editörde aynı kod, **her zaman senkronize**
 
 ```
-A Editörü: Değişiklik → WebSocket → Yjs Server → B Editörü: Güncelle
+A Editörü: Değişiklik → WebSocket (Port 1234) → Yjs Server → B Editörü: Güncelle
 ```
 
 ### 2️⃣ **OS-Level Dosya Kilidi**
@@ -51,10 +51,14 @@ Senaryo:
   B bitince sinyali → A'nın dosyası yine yazılabilir hale dönüyor
 ```
 
-### 3️⃣ **Sınırlandırılmış Çakışma**
+### 3️⃣ **Sınırlandırılmış Çakışma ve AI Trafik Ajanı (Yeni!)**
 - Aynı satırda **iki ajan yazamaz**
-- Aynı dosyada **yazma işlemi çakışmaz**
+- Çakışma durumunda **Claude 3.5 Haiku (OpenRouter)** devreye girer. Kilitli dosyaya erişmeye çalışan geliştiriciye alternatif görev önerir (Örn: "Şu an x kişisi bu dosyada çalışıyor, sen başka bir dosyaya geç.").
 - Tüm senkronizasyon **otomatik ve anlık**
+
+### 4️⃣ **Monad Testnet Üzerinden Erişim Kontrolü (Yeni!)**
+- AgentSync ağını kullanmak için **Monad ağında akıllı kontrat üzerinden** erişim hakkı satın alınmalıdır.
+- Eklenti, **Ethers.js** aracılığıyla cüzdan imzası isteyerek doğrulamayı sağlar. Eklenti içerisinde GitHub auth ile birlikte cüzdan güvenliği de kullanılır.
 
 ---
 
@@ -114,8 +118,8 @@ developer-b$ Şimdi yazabilir
 |-----|----------|
 | **Adı** | AgentSync |
 | **Türü** | VS Code Extension |
-| **Amacı** | Multiplayer AI-agent yazma senkronizasyonu |
-| **Teknoloji** | Node.js, TypeScript, Yjs, WebSocket, OS File Permissions |
+| **Amacı** | Multiplayer AI-agent yazma senkronizasyonu ve kilit yönetimi |
+| **Teknoloji** | Node.js, TypeScript, Yjs, WebSocket, OS File Permissions, Ethers.js, Monad, OpenRouter (Claude) |
 | **Faz Sayısı** | 5 |
 | **Tahmini Süre** | Hackathon (Sınırlı) |
 

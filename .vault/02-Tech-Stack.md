@@ -33,11 +33,14 @@
 | Teknoloji | Versiyon | Amaç |
 |-----------|----------|------|
 | **Node.js** | 16+ | JavaScript runtime |
-| **y-websocket** | Latest | WebSocket sunucusu (hazır paket) |
+| **y-websocket** | Latest | WebSocket sunucusu (Yjs port 1234) |
 | **yjs** | Latest | CRDT algoritması (sinkronizasyon) |
 | **TypeScript** | 4.5+ | Tip güvenliği |
+| **OpenRouter API** | Latest | Claude 3.5 modeli ile Trafik Ajanı (port 1235) |
+| **Ethers.js** | Latest | Monad testnet erişimi |
+| **Solidity** | 0.8.x | Erişim Kontrolü için Smart Contract |
 
-**Veritabanı**: YOKTUR! Sadece trafiği yönlendiren sunucu.
+**Veritabanı**: YOKTUR! Sadece trafiği yönlendiren ve AI ile kilit çatışmalarını çözen sunucu.
 
 ### İstemci (VS Code Extension)
 
@@ -47,7 +50,9 @@
 | **TypeScript** | 4.5+ | Tip güvenliği |
 | **yjs** | Latest | İstemci tarafı CRDT |
 | **y-websocket** | Latest | İstemci tarafı WebSocket |
-| **Node.js fs modülü** | Built-in | Dosya izin yönetimi |
+| **Node.js fs modülü** | Built-in | Dosya izin yönetimi (OS Level Lock) |
+| **Ethers.js** | Latest | Cüzdan imzası (Monad onayı için) |
+| **GitHub Auth API** | Built-in | Geliştirici kimlik doğrulama |
 
 ---
 
@@ -163,9 +168,11 @@ VS Code Eklentisi A          WebSocket Sunucu          VS Code Eklentisi B
 | Katman | Teknoloji | Rol |
 |--------|-----------|-----|
 | **Frontend** | VS Code Extension API | UI & dosya editörü |
-| **Senkronizasyon** | Yjs + WebSocket | Gerçek zamanlı sync |
-| **Sunucu** | Node.js + y-websocket | Mesaj broker |
+| **Senkronizasyon** | Yjs + WebSocket | Gerçek zamanlı sync (Port 1234) |
+| **Sunucu** | Node.js + y-websocket | Mesaj broker & AI Yönlendirici (Port 1235) |
 | **Dosya Kilidi** | fs.chmodSync | Yazma engeli |
+| **Erişim Kontrolü**| Solidity + Monad + Ethers.js | Akıllı kontrat ile ödemeli erişim |
+| **AI Ajanı** | OpenRouter (Claude) | Çakışma durumunda alternatif yönlendirme |
 | **Dil** | TypeScript | Tip güvenliği |
 
 ---

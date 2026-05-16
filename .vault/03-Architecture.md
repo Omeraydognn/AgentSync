@@ -17,15 +17,15 @@
 │   │ • File Lock │                  │ • File Lock │                      │
 │   └──────┬──────┘                  └──────┬──────┘                      │
 │          │                                  │                            │
-│          │         WebSocket Protocol       │                            │
+│          │         WebSocket (Ports 1234 & 1235)    │                            │
 │          └──────────────────┬───────────────┘                            │
 │                             │                                             │
 │                   ┌─────────▼────────┐                                   │
-│                   │  Node.js Server  │                                   │
+│                   │  Node.js Server  │◄───── (Web3) ──► Monad Smart Contract │
 │                   │  (y-websocket)   │                                   │
-│                   │                  │                                   │
-│                   │ • Broadcast      │                                   │
-│                   │ • Sync Updates   │                                   │
+│                   │                  │◄──── (API) ───► OpenRouter (Claude 3.5) │
+│                   │ • Yjs Broadcast  │                                   │
+│                   │ • Traffic Control│                                   │
 │                   │ • No DB (!)      │                                   │
 │                   └──────────────────┘                                   │
 │                                                                          │
@@ -131,8 +131,13 @@ node-server/
    │ connects │   Broadcast  │ connects    │
    └────┬─────┘   Updates    └──────┬──────┘
         │                            │
-        │   Y.Text Update from A     │
+        │   Y.Text Update / Lock     │
         └────────────────────────────┘
+                      │
+        ┌─────────────▼──────────────┐
+        │       AI Traffic Agent     │
+        │      (Port 1235 Control)   │
+        └─────────────┬──────────────┘
                       │
         ┌─────────────▼──────────────┐
         │                            │
@@ -152,19 +157,22 @@ node-server/
 ```
 Başlangıç: dosya = 0o666 (yazılabilir)
                      │
-          B ajanı yazıyor → "write_start" sinyali
+           B ajanı yazıyor → "write_start" (Port 1235 üzerinden lock isteği)
                      │
                      ▼
-          A'da: fs.chmodSync(file, 0o444)
-               dosya = Salt Okunur
+           A'da: fs.chmodSync(file, 0o444)
+                dosya = Salt Okunur
                      │
-          A ajandı yazarsa: EACCES (izin hatası)
+           A ajandı yazarsa: EACCES (izin hatası)
                      │
-          B bitirdi → "write_end" sinyali
+           A ajandı kilitli dosyaya erişmeye çalışırsa:
+           Sunucu Claude AI'a danışır ve A'ya "Başka dosyaya geç" önerisi yollar. (Status bar: 💡)
+                     │
+           B bitirdi → "write_end" (Port 1235 üzerinden unlock)
                      │
                      ▼
-          A'da: fs.chmodSync(file, 0o666)
-               dosya = yazılabilir
+           A'da: fs.chmodSync(file, 0o666)
+                dosya = yazılabilir
 ```
 
 ### Güvenlik Ağı (Deactivation)
